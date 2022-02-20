@@ -33,6 +33,11 @@ public class StudentService {
         Student foundStudent = entityManager.find(Student.class,id);
         entityManager.remove(foundStudent);
     }
+    public List<Student> getByLastName(String lastName){
+        String query = "SELECT s FROM Student s WHERE s.lastName = :lastName";
+        return entityManager.createQuery(query, Student.class).setParameter("lastName", lastName).getResultList();
+    }
+
 
 
 }

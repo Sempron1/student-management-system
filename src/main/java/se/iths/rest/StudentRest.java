@@ -52,4 +52,14 @@ public class StudentRest {
         studentService.deleteStudent(id);
         return Response.ok().build();
     }
+
+    @Path("getbylastname")
+    @GET
+    public Response getByLastName(@QueryParam("lastName") String lastName){
+
+        List<Student> foundStudent = studentService.getByLastName(lastName);
+
+        return Response.ok(foundStudent).build();
+    }
+
 }
