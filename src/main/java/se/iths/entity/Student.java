@@ -1,6 +1,8 @@
 package se.iths.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "student")
@@ -10,9 +12,13 @@ public class Student {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @NotEmpty
     private String firstName;
+    @NotEmpty
     private String lastName;
+    @NotEmpty
     private String email;
+
     private String phoneNumber;
 
     public Long getId() {
