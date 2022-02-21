@@ -25,7 +25,12 @@ public class StudentService {
     }
 
     public void updateStudent(Student student){
-        entityManager.merge(student);
+
+        if(findStudentById(student.getId()) != null){
+            entityManager.merge(student);
+        }else
+            throw new EntityNotFoundException();
+
     }
 
     public Student findStudentById(Long id){
