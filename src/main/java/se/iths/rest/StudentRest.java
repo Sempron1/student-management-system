@@ -3,7 +3,6 @@ package se.iths.rest;
 import se.iths.entity.Student;
 import se.iths.service.StudentService;
 
-import javax.ejb.PostActivate;
 import javax.inject.Inject;
 import javax.persistence.EntityNotFoundException;
 import javax.ws.rs.*;
@@ -23,7 +22,6 @@ public class StudentRest {
     @Path("")
     @POST
     public Response createStudent(Student student) throws SQLSyntaxErrorException{
-
         studentService.createStudent(student);
         return Response.ok(student).build();
     }
@@ -63,6 +61,7 @@ public class StudentRest {
     @DELETE
     public Response deleteStudent(@PathParam("id") Long id ){
         studentService.deleteStudent(id);
+
         return Response.ok().build();
     }
 

@@ -3,6 +3,7 @@ package se.iths.service;
 import se.iths.entity.Student;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.sql.SQLSyntaxErrorException;
@@ -37,6 +38,10 @@ public class StudentService {
 
     public void deleteStudent(Long id){
         Student foundStudent = entityManager.find(Student.class,id);
+
+        if(foundStudent == null){
+            throw new EntityNotFoundException();
+        }
         entityManager.remove(foundStudent);
     }
     public List<Student> getByLastName(String lastName){
