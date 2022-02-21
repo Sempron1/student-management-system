@@ -9,6 +9,7 @@ import javax.persistence.EntityNotFoundException;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.sql.SQLSyntaxErrorException;
 import java.util.List;
 
 @Path("students")
@@ -21,7 +22,8 @@ public class StudentRest {
 
     @Path("")
     @POST
-    public Response createStudent(Student student){
+    public Response createStudent(Student student) throws SQLSyntaxErrorException{
+
         studentService.createStudent(student);
         return Response.ok(student).build();
     }
