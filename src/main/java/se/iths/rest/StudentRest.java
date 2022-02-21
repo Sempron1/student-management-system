@@ -5,6 +5,7 @@ import se.iths.service.StudentService;
 
 import javax.ejb.PostActivate;
 import javax.inject.Inject;
+import javax.persistence.EntityNotFoundException;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -34,8 +35,13 @@ public class StudentRest {
 
     @Path("{id}")
     @GET
-    public Response getStudent(@PathParam("id") Long id){
+    public Response getStudent(@PathParam("id") Long id) {
         Student foundStudent = studentService.findStudentById(id);
+
+        if(foundStudent == null){
+            throw new EntityNotFoundException();
+        }
+
         return Response.ok(foundStudent).build();
     }
 
@@ -43,6 +49,11 @@ public class StudentRest {
     @GET
     public Response getAllStudents(){
         List<Student> foundStudents = studentService.getAllStudents();
+
+        if(foundStudents.isEmpty()){
+            throw new EntityNotFoundException();
+        }
+
         return Response.ok(foundStudents).build();
     }
 
@@ -58,6 +69,10 @@ public class StudentRest {
     public Response getByLastName(@QueryParam("lastName") String lastName){
 
         List<Student> foundStudent = studentService.getByLastName(lastName);
+
+        if(foundStudent.isEmpty()){
+            throw new EntityNotFoundException();
+        }
 
         return Response.ok(foundStudent).build();
     }
