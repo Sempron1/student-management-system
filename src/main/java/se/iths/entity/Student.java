@@ -18,8 +18,19 @@ public class Student {
     private String lastName;
     @NotEmpty
     private String email;
+    @NotEmpty
+    private String age;
 
     private String phoneNumber;
+
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
 
     public Long getId() {
         return id;
