@@ -27,12 +27,14 @@ public class StudentService {
         entityManager.persist(student);
     }
 
-    public void updateStudent(Student student){
+    public void updateStudent(Student student) throws InvalidAgeException {
 
-        if(findStudentById(student.getId()) != null){
-            entityManager.merge(student);
-        } else
+        if(findStudentById(student.getId()) == null){
             throw new EntityNotFoundException();
+        }else if(Integer.parseInt(student.getAge()) < 14 || Integer.parseInt(student.getAge()) > 18)
+            throw new InvalidAgeException("Invalid age of a high school student");
+
+        entityManager.merge(student);
 
     }
 

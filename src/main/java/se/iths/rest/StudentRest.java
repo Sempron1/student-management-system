@@ -29,7 +29,7 @@ public class StudentRest {
 
     @Path("")
     @PUT
-    public Response updateStudent(Student student){
+    public Response updateStudent(Student student) throws InvalidAgeException {
         studentService.updateStudent(student);
         return Response.ok(student).build();
     }
