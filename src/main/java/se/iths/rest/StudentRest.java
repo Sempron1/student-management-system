@@ -1,6 +1,7 @@
 package se.iths.rest;
 
 import se.iths.entity.Student;
+import se.iths.exceptionMapper.InvalidAgeException;
 import se.iths.service.StudentService;
 
 import javax.inject.Inject;
@@ -21,7 +22,7 @@ public class StudentRest {
 
     @Path("")
     @POST
-    public Response createStudent(Student student) throws SQLSyntaxErrorException{
+    public Response createStudent(Student student) throws SQLSyntaxErrorException, InvalidAgeException {
         studentService.createStudent(student);
         return Response.ok(student).build();
     }

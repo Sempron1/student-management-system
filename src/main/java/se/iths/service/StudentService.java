@@ -1,6 +1,7 @@
 package se.iths.service;
 
 import se.iths.entity.Student;
+import se.iths.exceptionMapper.InvalidAgeException;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
@@ -15,11 +16,13 @@ public class StudentService {
     @PersistenceContext
     EntityManager entityManager;
 
-    public void createStudent(Student student) throws SQLSyntaxErrorException {
+    public void createStudent(Student student) throws SQLSyntaxErrorException, InvalidAgeException {
 
         if(student.getEmail().isEmpty() || student.getFirstName().isEmpty() || student.getLastName().isEmpty()){
             throw new SQLSyntaxErrorException();
         }
+        else if( Integer.parseInt(student.getAge()) < 14 || Integer.parseInt(student.getAge()) > 18)
+            throw new InvalidAgeException("Invalid age for a high school student");
 
         entityManager.persist(student);
     }
@@ -28,7 +31,7 @@ public class StudentService {
 
         if(findStudentById(student.getId()) != null){
             entityManager.merge(student);
-        }else
+        } else
             throw new EntityNotFoundException();
 
     }
