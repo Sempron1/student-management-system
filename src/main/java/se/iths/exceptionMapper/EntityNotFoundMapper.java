@@ -11,6 +11,8 @@ public class EntityNotFoundMapper implements ExceptionMapper<EntityNotFoundExcep
     @Override
     public Response toResponse(EntityNotFoundException e) {
 
-        return Response.status(Response.Status.NOT_FOUND).entity(new BasicResponse("Empty... Please add students to the database")).type(MediaType.APPLICATION_JSON).build();
+        return Response.status(Response.Status.NOT_FOUND)
+                .entity(new BasicResponse("Empty... Please add students to the database"))
+                .type(MediaType.APPLICATION_JSON).build();
     }
 }

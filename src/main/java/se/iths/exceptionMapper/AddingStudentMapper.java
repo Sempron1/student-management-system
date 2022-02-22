@@ -10,6 +10,8 @@ import java.sql.SQLSyntaxErrorException;
 public class AddingStudentMapper implements ExceptionMapper<SQLSyntaxErrorException> {
     @Override
     public Response toResponse(SQLSyntaxErrorException e) {
-        return Response.status(Response.Status.BAD_REQUEST).entity(new BasicResponse("firstName,lastName and email are all required fields")).type(MediaType.APPLICATION_JSON).build();
+        return Response.status(Response.Status.BAD_REQUEST)
+                .entity(new BasicResponse("firstName,lastName and email are all required fields"))
+                .type(MediaType.APPLICATION_JSON).build();
     }
 }
