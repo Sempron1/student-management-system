@@ -23,6 +23,16 @@ public class Student {
 
     private String phoneNumber;
 
+    public Student(String firstName, String lastName, String email, String age, String phoneNumber) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.age = age;
+        this.phoneNumber = phoneNumber;
+    }
+
+    public Student() {
+    }
 
     public String getAge() {
         return age;
