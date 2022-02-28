@@ -2,14 +2,12 @@ package se.iths.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Entity
-@Table(name = "student")
-public class Student {
+@Table(name = "teacher")
+public class Teacher {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
@@ -26,7 +24,7 @@ public class Student {
 
     private String phoneNumber;
 
-    @ManyToMany(mappedBy = "students")
+    @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Subject> subjects = new ArrayList<>();
 
     public List<Subject> getSubjects() {
@@ -37,7 +35,7 @@ public class Student {
         this.subjects = subjects;
     }
 
-    public Student(String firstName, String lastName, String email, String age, String phoneNumber) {
+    public Teacher(String firstName, String lastName, String email, String age, String phoneNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -45,23 +43,7 @@ public class Student {
         this.phoneNumber = phoneNumber;
     }
 
-    public Student() {
-    }
-
-    public String getAge() {
-        return age;
-    }
-
-    public void setAge(String age) {
-        this.age = age;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public Teacher() {
     }
 
     public String getFirstName() {
@@ -88,6 +70,14 @@ public class Student {
         this.email = email;
     }
 
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
+
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -96,16 +86,11 @@ public class Student {
         this.phoneNumber = phoneNumber;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Student student = (Student) o;
-        return id != null && Objects.equals(id, student.id);
+    public Long getId() {
+        return id;
     }
 
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
+    public void setId(Long id) {
+        this.id = id;
     }
 }
