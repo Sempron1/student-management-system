@@ -1,5 +1,6 @@
 package se.iths.entity;
 
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -24,6 +25,11 @@ public class Subject {
     @JoinColumn(name = "teacher_id")
     private Teacher teacher;
 
+
+    public void addStudents(Student student){
+        students.add(student);
+    }
+
     public Teacher getTeacher() {
         return teacher;
     }
@@ -32,6 +38,7 @@ public class Subject {
         this.teacher = teacher;
     }
 
+    @JsonbTransient
     public Set<Student> getStudents() {
         return students;
     }
@@ -40,8 +47,7 @@ public class Subject {
         this.students = students;
     }
 
-    public Subject(Long id, String name) {
-        this.id = id;
+    public Subject(String name) {
         this.name = name;
     }
 

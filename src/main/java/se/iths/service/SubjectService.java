@@ -24,10 +24,7 @@ public class SubjectService {
     }
 
     public void updateSubject(Subject subject){
-
-
         entityManager.merge(subject);
-
     }
 
     public Subject findSubjectById(Long id){
