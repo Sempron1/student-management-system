@@ -9,6 +9,7 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PrePersist;
 
 @Singleton
 @Startup
@@ -20,10 +21,11 @@ public class SampleDataGenerator {
     @PostConstruct
     public void generateData(){
 
-        Teacher teacher1 = new Teacher("Johan", "Johansson", "Johan@mail.se","40","687923");
+        Teacher teacher1 = new Teacher("Johan ", "Johansson", "Johan@mail.se","40","687923");
+        Teacher teacher2 = new Teacher("Klara ", "Klarasson", "Klara@mail.se", "32", "1238905");
 
-        Student student1 = new Student("Luke","Fine","lukas@mail.se","22","12349");
-        Student student2 = new Student("Alicia","Johansson","Alicia@mail.se","21","12412");
+        Student student1 = new Student("Luke ","Fine","lukas@mail.se","22","12349");
+        Student student2 = new Student("Alicia ","Johansson","Alicia@mail.se","21","12412");
 
         Subject subject1 = new Subject("Math");
         Subject subject2 = new Subject("Biology");
@@ -46,16 +48,18 @@ public class SampleDataGenerator {
 
         teacher1.addSubject(subject1);
         teacher1.addSubject(subject2);
-        teacher1.addSubject(subject3);
+        teacher2.addSubject(subject3);
 
 
         entityManager.persist(student1);
         entityManager.persist(student2);
+
         entityManager.persist(subject1);
         entityManager.persist(subject2);
         entityManager.persist(subject3);
 
         entityManager.persist(teacher1);
+        entityManager.persist(teacher2);
 
     }
 }

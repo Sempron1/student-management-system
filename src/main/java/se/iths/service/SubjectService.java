@@ -8,6 +8,7 @@ import se.iths.exceptionMapper.InvalidAgeException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.sql.SQLSyntaxErrorException;
 import java.util.List;
@@ -38,5 +39,11 @@ public class SubjectService {
     public void deleteSubject(Long id){
         Subject foundSubject = entityManager.find(Subject.class,id);
         entityManager.remove(foundSubject);
+    }
+
+    public List<Subject> getBySubject(Long subjectId){
+        TypedQuery<Subject> query = entityManager.createQuery("select s.name, concat( t.firstName, t.lastName)  from Subject s inner join s.teacher t where s.id = :subjectId", Subject.class);
+        List<Subject> resultList = query.setParameter("subjectId", subjectId).getResultList();
+        return resultList;
     }
 }

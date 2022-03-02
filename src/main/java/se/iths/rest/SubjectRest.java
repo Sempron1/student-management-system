@@ -59,5 +59,13 @@ public class SubjectRest {
 
         return Response.ok().build();
     }
+
+    @Path("/students/{id}")
+    @GET
+    public Response getBySubject(@PathParam("id") Long subjectId ){
+        List<Subject> foundSubject = subjectService.getBySubject(subjectId);
+        return Response.ok(foundSubject).build();
+    }
+
     
 }
