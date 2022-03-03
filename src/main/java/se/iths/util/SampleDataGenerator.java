@@ -38,13 +38,6 @@ public class SampleDataGenerator {
         student1.addSubject(subject3);
         student2.addSubject(subject3);
 
-        subject1.addStudents(student1);
-        subject1.addStudents(student2);
-        subject2.addStudents(student1);
-        subject2.addStudents(student2);
-        subject3.addStudents(student1);
-        subject3.addStudents(student2);
-
 
         teacher1.addSubject(subject1);
         teacher1.addSubject(subject2);
