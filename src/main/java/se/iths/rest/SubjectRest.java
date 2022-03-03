@@ -60,10 +60,17 @@ public class SubjectRest {
         return Response.ok().build();
     }
 
-    @Path("/students/{id}")
+    @Path("/all/{id}")
     @GET
-    public Response getBySubject(@PathParam("id") Long subjectId ){
-        List<Subject> foundSubject = subjectService.getBySubject(subjectId);
+    public Response getAllBySubject(@PathParam("id") Long subjectId ){
+        List<Subject> foundSubject = subjectService.getAllBySubject(subjectId);
+        return Response.ok(foundSubject).build();
+    }
+
+    @Path("{subjectId}/student/{studentId}")
+    @GET
+    public Response getAllSubjectAndStudents(@PathParam("subjectId") Long subjectId, @PathParam("studentId") Long studentId){
+        List<Subject> foundSubject = subjectService.getBySubjectAndStudent(subjectId, studentId);
         return Response.ok(foundSubject).build();
     }
 

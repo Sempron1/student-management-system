@@ -41,9 +41,15 @@ public class SubjectService {
         entityManager.remove(foundSubject);
     }
 
-    public List<Subject> getBySubject(Long subjectId){
-        TypedQuery<Subject> query = entityManager.createQuery("select s.name, concat( t.firstName, t.lastName)  from Subject s inner join s.teacher t where s.id = :subjectId", Subject.class);
+    public List<Subject> getAllBySubject(Long subjectId){
+        TypedQuery<Subject> query = entityManager.createQuery("select s, stud  from Subject s inner join s.students stud inner join stud.subjects sub where s.id = :subjectId", Subject.class);
         List<Subject> resultList = query.setParameter("subjectId", subjectId).getResultList();
+        return resultList;
+    }
+
+    public List<Subject> getBySubjectAndStudent(Long subjectId, Long studentId){
+        TypedQuery<Subject> query = entityManager.createQuery("select s, stud from Subject s inner join s.students stud inner join stud.subjects sub where s.id = :subjectId and stud.id = :studentId group by s.id", Subject.class);
+        List<Subject> resultList = query.setParameter("subjectId", subjectId).setParameter("studentId", studentId).getResultList();
         return resultList;
     }
 }
