@@ -26,10 +26,6 @@ public class Subject {
     private Teacher teacher;
 
 
-    public void addStudents(Student student){
-        students.add(student);
-    }
-
     public Teacher getTeacher() {
         return teacher;
     }

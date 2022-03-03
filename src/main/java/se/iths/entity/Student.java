@@ -41,6 +41,12 @@ public class Student {
 
     public void addSubject(Subject subject){
         subjects.add(subject);
+        subject.getStudents().add(this);
+    }
+
+    public void removeSubject(Subject subject){
+        subjects.remove(subject);
+        subject.getStudents().remove(this);
     }
 
     public Student(String firstName, String lastName, String email, String age, String phoneNumber) {
