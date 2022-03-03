@@ -1,5 +1,6 @@
 package se.iths.service;
 
+import se.iths.entity.Student;
 import se.iths.entity.Subject;
 import se.iths.entity.Teacher;
 
@@ -23,6 +24,14 @@ public class TeacherService {
     public void updateTeacher(Teacher teacher){
         entityManager.merge(teacher);
     }
+
+    public void addSubject(Long teacherId, Long subjectId){
+        Subject foundSubject = entityManager.find(Subject.class, subjectId);
+        Teacher foundTeacher = entityManager.find(Teacher.class, teacherId);
+        foundTeacher.addSubject(foundSubject);
+        entityManager.merge(foundTeacher);
+    }
+
 
     public Teacher findTeacherById(Long id){
         return entityManager.find(Teacher.class,id);
