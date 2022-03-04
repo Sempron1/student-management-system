@@ -25,14 +25,15 @@ public class Subject {
     @JoinColumn(name = "teacher_id")
     private Teacher teacher;
 
-
-    public Teacher getTeacher() {
-        return teacher;
+    public Subject(String name) {
+        this.name = name;
     }
 
-    public void setTeacher(Teacher teacher) {
-        this.teacher = teacher;
+    public Subject() {
     }
+
+    //It tastes just like fried food, but it is not that greasy
+
 
     @JsonbTransient
     public Set<Student> getStudents() {
@@ -43,12 +44,17 @@ public class Subject {
         this.students = students;
     }
 
-    public Subject(String name) {
-        this.name = name;
+
+
+
+    public Teacher getTeacher() {
+        return teacher;
     }
 
-    public Subject() {
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
     }
+
 
     public String getName() {
         return name;

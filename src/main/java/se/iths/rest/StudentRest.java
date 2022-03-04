@@ -23,14 +23,14 @@ public class StudentRest {
     @Path("")
     @POST
     public Response createStudent(Student student) throws SQLSyntaxErrorException, InvalidAgeException {
-        studentService.createStudent(student);
+        studentService.create(student);
         return Response.ok(student).build();
     }
 
     @Path("")
     @PUT
     public Response updateStudent(Student student) throws InvalidAgeException {
-        studentService.updateStudent(student);
+        studentService.update(student);
         return Response.ok(student).build();
     }
 
@@ -44,7 +44,7 @@ public class StudentRest {
     @Path("{id}")
     @GET
     public Response getStudent(@PathParam("id") Long id) {
-        Student foundStudent = studentService.findStudentById(id);
+        Student foundStudent = studentService.findById(id);
 
         if(foundStudent == null){
             throw new EntityNotFoundException();
@@ -56,7 +56,7 @@ public class StudentRest {
     @Path("")
     @GET
     public Response getAllStudents(){
-        List<Student> foundStudents = studentService.getAllStudents();
+        List<Student> foundStudents = studentService.getAll();
 
         if(foundStudents.isEmpty()){
             throw new EntityNotFoundException();
@@ -68,7 +68,7 @@ public class StudentRest {
     @Path("{id}")
     @DELETE
     public Response deleteStudent(@PathParam("id") Long id ){
-        studentService.deleteStudent(id);
+        studentService.delete(id);
 
         return Response.ok().build();
     }

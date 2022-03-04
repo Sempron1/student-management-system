@@ -14,12 +14,12 @@ import java.sql.SQLSyntaxErrorException;
 import java.util.List;
 
 @Transactional
-public class SubjectService {
+public class SubjectService extends EntityService{
 
     @PersistenceContext
     EntityManager entityManager;
 
-    public void createSubject(Subject subject) {
+    public void create(Subject subject) {
 
         entityManager.persist(subject);
     }
@@ -28,15 +28,17 @@ public class SubjectService {
         entityManager.merge(subject);
     }
 
-    public Subject findSubjectById(Long id){
+    public Subject findById(Long id){
         return entityManager.find(Subject.class,id);
     }
 
-    public List<Subject> getAllSubject(){
+    @Override
+    public List<Subject> getAll(){
         return entityManager.createQuery("SELECT s FROM Subject s", Subject.class).getResultList();
     }
 
-    public void deleteSubject(Long id){
+    @Override
+    public void delete(Long id){
         Subject foundSubject = entityManager.find(Subject.class,id);
         entityManager.remove(foundSubject);
     }

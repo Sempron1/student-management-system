@@ -10,18 +10,18 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Transactional
-public class TeacherService {
+public class TeacherService extends EntityService{
 
     @PersistenceContext
     EntityManager entityManager;
 
 
-    public void createTeacher(Teacher teacher) {
+    public void create(Teacher teacher) {
 
         entityManager.persist(teacher);
     }
 
-    public void updateTeacher(Teacher teacher){
+    public void update(Teacher teacher){
         entityManager.merge(teacher);
     }
 
@@ -32,16 +32,16 @@ public class TeacherService {
         entityManager.merge(foundTeacher);
     }
 
-
-    public Teacher findTeacherById(Long id){
+    @Override
+    public Teacher findById(Long id){
         return entityManager.find(Teacher.class,id);
     }
-
-    public List<Teacher> getAllTeacher(){
+    @Override
+    public List<Teacher> getAll(){
         return entityManager.createQuery("SELECT s FROM Teacher s", Teacher.class).getResultList();
     }
-
-    public void deleteTeacher(Long id){
+    @Override
+    public void delete(Long id){
         Teacher foundTeacher = entityManager.find(Teacher.class,id);
         entityManager.remove(foundTeacher);
     }

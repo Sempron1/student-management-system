@@ -22,14 +22,14 @@ public class TeacherRest {
     @Path("")
     @POST
     public Response createTeacher(Teacher teacher) {
-        teacherService.createTeacher(teacher);
+        teacherService.create(teacher);
         return Response.ok(teacher).build();
     }
 
     @Path("")
     @PUT
     public Response updateTeacher(Teacher teacher) {
-        teacherService.updateTeacher(teacher);
+        teacherService.update(teacher);
         return Response.ok(teacher).build();
     }
 
@@ -43,7 +43,7 @@ public class TeacherRest {
     @Path("{id}")
     @GET
     public Response getTeacher(@PathParam("id") Long id) {
-        Teacher foundTeacher = teacherService.findTeacherById(id);
+        Teacher foundTeacher = teacherService.findById(id);
 
         return Response.ok(foundTeacher).build();
     }
@@ -51,7 +51,7 @@ public class TeacherRest {
     @Path("")
     @GET
     public Response getAllTeachers(){
-        List<Teacher> foundTeachers = teacherService.getAllTeacher();
+        List<Teacher> foundTeachers = teacherService.getAll();
 
 
         return Response.ok(foundTeachers).build();
@@ -60,7 +60,7 @@ public class TeacherRest {
     @Path("{id}")
     @DELETE
     public Response deleteTeacher(@PathParam("id") Long id ){
-        teacherService.deleteTeacher(id);
+        teacherService.delete(id);
 
         return Response.ok().build();
     }

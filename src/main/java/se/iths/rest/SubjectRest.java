@@ -24,7 +24,7 @@ public class SubjectRest {
     @Path("")
     @POST
     public Response createSubject(Subject subject) {
-        subjectService.createSubject(subject);
+        subjectService.create(subject);
         return Response.ok(subject).build();
     }
 
@@ -38,7 +38,7 @@ public class SubjectRest {
     @Path("{id}")
     @GET
     public Response getSubject(@PathParam("id") Long id) {
-        Subject foundSubject = subjectService.findSubjectById(id);
+        Subject foundSubject = subjectService.findById(id);
 
         return Response.ok(foundSubject).build();
     }
@@ -46,7 +46,7 @@ public class SubjectRest {
     @Path("")
     @GET
     public Response getAllSubjects(){
-        List<Subject> foundSubjects = subjectService.getAllSubject();
+        List<Subject> foundSubjects = subjectService.getAll();
 
 
         return Response.ok(foundSubjects).build();
@@ -55,7 +55,7 @@ public class SubjectRest {
     @Path("{id}")
     @DELETE
     public Response deleteSubject(@PathParam("id") Long id ){
-        subjectService.deleteSubject(id);
+        subjectService.delete(id);
 
         return Response.ok().build();
     }

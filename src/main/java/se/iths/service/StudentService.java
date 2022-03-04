@@ -13,12 +13,12 @@ import java.util.List;
 import java.util.Objects;
 
 @Transactional
-public class StudentService {
+public class StudentService extends EntityService{
 
     @PersistenceContext
     EntityManager entityManager;
 
-    public void createStudent(Student student) throws SQLSyntaxErrorException, InvalidAgeException {
+    public void create(Student student) throws SQLSyntaxErrorException, InvalidAgeException {
 
         if(student.getEmail().isEmpty() || student.getFirstName().isEmpty() || student.getLastName().isEmpty()){
             throw new SQLSyntaxErrorException();
@@ -37,9 +37,9 @@ public class StudentService {
         entityManager.merge(foundStudent);
     }
 
-    public void updateStudent(Student student) throws InvalidAgeException {
+    public void update(Student student) throws InvalidAgeException {
 
-        if(findStudentById(student.getId()) == null){
+        if(findById(student.getId()) == null){
             throw new EntityNotFoundException();
         }else if(Integer.parseInt(student.getAge()) < 14 || Integer.parseInt(student.getAge()) > 18)
             throw new InvalidAgeException("Invalid age of a high school student");
@@ -48,15 +48,19 @@ public class StudentService {
 
     }
 
-    public Student findStudentById(Long id){
+    @Override
+    public Student findById(Long id){
         return entityManager.find(Student.class,id);
     }
 
-    public List<Student> getAllStudents(){
+    @Override
+    public List<Student> getAll(){
         return entityManager.createQuery("SELECT s FROM Student s", Student.class).getResultList();
     }
 
-    public void deleteStudent(Long id){
+
+    @Override
+    public void delete(Long id){
         Student foundStudent = entityManager.find(Student.class,id);
 
         if(foundStudent == null){
