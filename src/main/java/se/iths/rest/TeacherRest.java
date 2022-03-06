@@ -37,7 +37,7 @@ public class TeacherRest {
     @PUT
     public Response addSubject(@PathParam("teacherId") Long teacherId, @PathParam("subjectId")Long subjectId){
         teacherService.addSubject(teacherId, subjectId);
-        return Response.ok(teacherId).build();
+        return Response.ok().build();
     }
 
     @Path("{id}")
