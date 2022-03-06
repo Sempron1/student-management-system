@@ -35,9 +35,42 @@ JSON body:
 
 Delete student: http://localhost:8080/student-management-system/api/v1/students/idhere
 
+All other entities have the same crud endpoints with the same format. 
 
-I have also done a custom exception called: InvalidAgeException which throws and exception when the student isn't between the high school
-age interval(14-18). Also, I have been using the exceptionMapper to organize my exceptions.
+To connect a student and a subject, create a student and subject then use the endpoint:
+http://localhost:8080/student-management-system/api/v1/students/studentId/subject/subjectId
 
+JSON body subject: 
+
+http://localhost:8080/student-management-system/api/v1/subjects
+
+{
+"name": "Math"
+}
+
+To connect a teacher and a subject, create a teacher and subject then use the endpoint:
+http://localhost:8080/student-management-system/api/v1/teachers/teacherId/subject/subjectId
+
+JSON body teacher:
+
+http://localhost:8080/student-management-system/api/v1/teachers
+
+{
+"firstName": "Johan",
+"lastName": "Johansson",
+"age": "25",
+"email": "jj@mail.se",
+"phoneNumber": "1234467"
+}
+
+After that, use can use one of these endpoint to show relations between the tables:
+
+getAllBySubject
+http://localhost:8080/student-management-system/api/v1/subjects/all/subjectId
+
+getBySubjectAndStudent
+http://localhost:8080/student-management-system/api/v1/subjects/subjectId/student/studentId
+
+The hardest problem I meet was to connect the tables together using java. I had other problems too but not noteworthy in my opinion 
 
 
